@@ -38,6 +38,11 @@ then
   echo "App Key set to $key you can modify the file to update /config/SNIPE_IT_APP_KEY.txt"
 fi
 
+# run migrate everytime (updates the snipe-it db with any DB changes since initial DB creation)
+if [ -f /config/storage/oauth-public.key ]; then
+  php /var/www/html/artisan migrate --force
+fi
+
 # permissions
 chown -R abc:abc \
 	/config/ \
